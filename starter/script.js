@@ -94,7 +94,8 @@ var arrOfArr = [
   lowerCasedCharacters,
   upperCasedCharacters,
 ];
-console.table(arrOfArr);
+
+console.log(arrOfArr);
 
 // Generate a password when the button is clicked
 
@@ -117,84 +118,93 @@ console.table(arrOfArr);
 
 // Function to prompt user for password options
 // At least 8 characters but no more than 128.
-function getPasswordOptions() {
-  // Length of password
-  var passLength = prompt(
-    "Enter a number between 8 and 128 to determine the length of your password please: "
-  );
-  var passLengthInt = parseFloat(passLength, 10);
-  // Error handling for inputs that are not numbers
-  if (isNaN(passLengthInt)) {
-    getPasswordOptions();
-  } else if (passLengthInt < 8) {
-    getPasswordOptions();
-  } else if (passLengthInt > 128) {
-    getPasswordOptions();
+function passwordGenerator (){
+  function getPasswordOptions() {
+    // Length of password
+    var passLength = prompt(
+      "Enter a number between 8 and 128 to determine the length of your password please: "
+    );
+    console.log(typeof passLength);
+    var passLengthInt = parseInt(passLength, 10);
+        // console.log(typeof passLengthInt);
+    // Error handling for inputs that are not numbers
+    if (isNaN(passLengthInt)) {
+      getPasswordOptions();
+    } else if (passLengthInt < 8) {
+      getPasswordOptions();
+    } else if (passLengthInt > 128) {
+      getPasswordOptions();
+    }
+    return passLengthInt;
   }
-  return passLengthInt;
-}
-var passwordLength = getPasswordOptions();
-
-// Function for getting a random element from an array
-function getRandom(arr) {
-  passwordLength;
-  // Array of Arrays 
-  var newPassword = '';
-  var minOfArrOfArr = 0;
-  var maxOfArrOfArr = arrOfArr.length - 1;
+  var passwordLength = getPasswordOptions();
   
-
-
-
-  //Random number between 0 and 3 to determne which array to go in to
-  function getRandomElemntoArrOfArrInclusive(max, min) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1) + min); // The maximum is inclusive and the minimum is inclusive
+  // Function for getting a random element from an array
+  function getRandom(arr) {
+    passwordLength;
+    // Array of Arrays 
+    var newPassword = '';
+    var minOfArrOfArr = 0;
+    var maxOfArrOfArr = arrOfArr.length - 1;
+    
+  
+    //Random number between 0 and 3 to determne which array to go in to
+    function getRandomElemntoArrOfArrInclusive(max, min) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min + 1) + min); // The maximum is inclusive and the minimum is inclusive
+    }
+  
+    console.log(indexOfArrOfArr);
+    //Chosen random Array 
+   
+  
+    // console.log(chosenArr);
+    // console.log(indexOfchosenArr);
+    // console.log();
+  
+  
+    var i = 0;
+   while (i < passwordLength) {
+    var indexOfArrOfArr = getRandomElemntoArrOfArrInclusive(maxOfArrOfArr, minOfArrOfArr);
+    var minOfchosenArr = 0;
+    var chosenArr = arrOfArr[indexOfArrOfArr];
+    var maxOfchosenArr = chosenArr.length - 1;
+    var indexOfchosenArr = getRandomElemntoArrOfArrInclusive(maxOfchosenArr, minOfchosenArr)
+    newPassword += chosenArr[indexOfchosenArr];
+    i ++
+   }
+  
+   console.log(newPassword);
+   return newPassword;
   }
-
-  console.log(indexOfArrOfArr);
-  //Chosen random Array 
- 
-
-  // console.log(chosenArr);
-  // console.log(indexOfchosenArr);
-  // console.log();
-
-
-  var i = 0;
- while (i < passwordLength) {
-  var indexOfArrOfArr = getRandomElemntoArrOfArrInclusive(
-    maxOfArrOfArr,
-    minOfArrOfArr
-  );
-  var minOfchosenArr = 0;
-  var chosenArr = arrOfArr[indexOfArrOfArr];
-  var maxOfchosenArr = chosenArr.length - 1;
-  var indexOfchosenArr = getRandomElemntoArrOfArrInclusive(maxOfchosenArr, minOfchosenArr)
-  newPassword += chosenArr[indexOfchosenArr];
-  i ++
- }
-
- console.log(newPassword);
- return newPassword;
+  
+  var newGeneratedPassword = getRandom(arrOfArr);
+  return newGeneratedPassword;
+  console.log(`This is the the generated password:${newGeneratedPassword}`);
+  
+  // Function to generate password with user input
+  function generatePassword() {
+  
+  
+  }
+  
 }
-
-var newGeneratedPassword = getRandom(arrOfArr);
-
-// Function to generate password with user input
-function generatePassword() {}
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword();
+   var password = passwordGenerator()
+  // var password = generatePassword();
   var passwordText = document.querySelector("#password");
+  console.log(passwordText);
 
   passwordText.value = password;
+  // getPasswordOptions();
+  // alert('testi8ng')
 }
-
+writePassword()
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
