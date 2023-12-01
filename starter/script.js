@@ -117,33 +117,34 @@ console.table(arrOfArr);
 
 // Function to prompt user for password options
 // At least 8 characters but no more than 128.
-// function getPasswordOptions() {
-//   // Length of password
-//   var passLength = prompt(
-//     "Enter a number between 8 and 128 to determine the length of your password please: "
-//   );
-//   var passLengthInt = parseFloat(passLength, 10);
-//   // Error handling for inputs that are not numbers
-//   if (isNaN(passLengthInt)) {
-//     getPasswordOptions();
-//   } else if (passLengthInt < 8) {
-//     getPasswordOptions();
-//   } else if (passLengthInt > 128) {
-//     getPasswordOptions();
-//   }
-//   return passLengthInt;
-// }
-// getPasswordOptions();
+function getPasswordOptions() {
+  // Length of password
+  var passLength = prompt(
+    "Enter a number between 8 and 128 to determine the length of your password please: "
+  );
+  var passLengthInt = parseFloat(passLength, 10);
+  // Error handling for inputs that are not numbers
+  if (isNaN(passLengthInt)) {
+    getPasswordOptions();
+  } else if (passLengthInt < 8) {
+    getPasswordOptions();
+  } else if (passLengthInt > 128) {
+    getPasswordOptions();
+  }
+  return passLengthInt;
+}
+var passwordLength = getPasswordOptions();
 
 // Function for getting a random element from an array
 function getRandom(arr) {
-  // passLengthInt;
+  passwordLength;
   // Array of Arrays 
+  var newPassword = '';
   var minOfArrOfArr = 0;
   var maxOfArrOfArr = arrOfArr.length - 1;
   
 
-  var i = 0;
+
 
   //Random number between 0 and 3 to determne which array to go in to
   function getRandomElemntoArrOfArrInclusive(max, min) {
@@ -151,22 +152,35 @@ function getRandom(arr) {
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1) + min); // The maximum is inclusive and the minimum is inclusive
   }
+
+  console.log(indexOfArrOfArr);
+  //Chosen random Array 
+ 
+
+  // console.log(chosenArr);
+  // console.log(indexOfchosenArr);
+  // console.log();
+
+
+  var i = 0;
+ while (i < passwordLength) {
   var indexOfArrOfArr = getRandomElemntoArrOfArrInclusive(
     maxOfArrOfArr,
     minOfArrOfArr
   );
-  console.log(indexOfArrOfArr);
-  
-  //Chosen random Array 
   var minOfchosenArr = 0;
   var chosenArr = arrOfArr[indexOfArrOfArr];
   var maxOfchosenArr = chosenArr.length - 1;
+  var indexOfchosenArr = getRandomElemntoArrOfArrInclusive(maxOfchosenArr, minOfchosenArr)
+  newPassword += chosenArr[indexOfchosenArr];
+  i ++
+ }
 
-  console.log(chosenArr);
-  // while (i < passLengthInt) {}
+ console.log(newPassword);
+ return newPassword;
 }
 
-getRandom(arrOfArr);
+var newGeneratedPassword = getRandom(arrOfArr);
 
 // Function to generate password with user input
 function generatePassword() {}
