@@ -95,7 +95,6 @@ var arrOfArr = [
   upperCasedCharacters,
 ];
 
-console.log(arrOfArr);
 
 // Generate a password when the button is clicked
 
@@ -124,9 +123,8 @@ function passwordGenerator() {
     var passLength = prompt(
       "Enter a number between 8 and 128 to determine the length of your password please: "
     );
-    console.log(typeof passLength);
+  
     var passLengthInt = parseInt(passLength, 10);
-    // console.log(typeof passLengthInt);
     // Error handling for inputs that are not numbers
     if (isNaN(passLengthInt)) {
       getPasswordOptions();
@@ -146,7 +144,6 @@ function passwordGenerator() {
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1) + min); // The maximum is inclusive and the minimum is inclusive
   }
-
 
   // Function to generate password with user input
   function generatePassword(arr) {
@@ -186,11 +183,7 @@ function writePassword() {
   var password = passwordGenerator();
   // var password = generatePassword();
   var passwordText = document.querySelector("#password");
-  console.log(passwordText);
-
   passwordText.value = password;
-  // getPasswordOptions();
-  // alert('testi8ng')
 }
 writePassword();
 // Add event listener to generate button
